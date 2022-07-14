@@ -88,12 +88,12 @@ print(data_DUT.columns)
 data_logger["datetime shifted"]=data_logger["datetime shifted"].shift(-2)
 
 ax=data_logger.plot.scatter(x='DUT datetime', y='mTc 2500', color="DarkBlue", label="DUT");
-data_logger.plot.scatter(x="datetime shifted", y="mean T", color="DarkGreen", label="Logger",ax=ax);
-#data_DUT.plot.line(x='datetime', y='T HMP77', color="DarkBlue", label="DUT",ax=ax);
+data_logger.plot.scatter(x="datetime shifted", y="mean T", color="DarkGreen",marker="x" ,label="Logger",ax=ax);
+data_DUT.plot.line(x='datetime', y='T', color="DarkBlue", label="DUT" ,ax=ax);
 
 az=data_logger.plot.scatter(x='DUT datetime', y="mRHw_at_473", color="DarkRed", label="DUT");
 data_logger.plot.scatter(x="datetime shifted", y="mean RH, %", color="DarkGreen", label="Logger", ax=az);
-#data_DUT.plot.line(x='datetime', y='RH HMP77', color="DarkBlue", label="DUT",ax=az);
+data_DUT.plot.line(x='datetime', y='RH, %', color="DarkBlue", label="DUT",ax=az);
 plt.show()
 
 
