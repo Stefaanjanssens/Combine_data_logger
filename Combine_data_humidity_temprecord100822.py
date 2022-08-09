@@ -53,7 +53,7 @@ data_logger['datetime']=pd.to_datetime(data_logger['datetime'])
 #     prevdate=date
 
 if time_interval==0:
-    time_interval=data_DUT['datetime'].iloc[1]-data_DUT['datetime'].iloc[0]
+    time_interval=data_DUT['datetime'].iloc[3]-data_DUT['datetime'].iloc[2]
 data_DUT['datetime before shift']=data_DUT['datetime']
 
 
@@ -94,7 +94,7 @@ data_logger.to_excel(f"datacombined {filename_data}.xlsx")
 # print(data_logger.columns)
 # print(data_DUT.columns)
 
-ax=data_logger.plot.scatter(x='datetime', y='mTc 2900', color="DarkBlue", label="logger");
+ax=data_logger.plot.scatter(x='datetime', y='mTc 2500', color="DarkBlue", label="logger");
 #data_logger.plot.scatter(x="datetime", y="mean T", color="DarkGreen",marker="x" ,label="DUT",ax=ax);
 plt.errorbar(x=data_logger["datetime"], y=data_logger["mean Temperature"],xerr=average_time ,yerr=data_logger["std Temperature"], color="DarkGreen", label="DUT",fmt=".");
 data_DUT.plot.line(x='datetime', y='Temperature', color="DarkBlue", label="DUT" ,ax=ax);

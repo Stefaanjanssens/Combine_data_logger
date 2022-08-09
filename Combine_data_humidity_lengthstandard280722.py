@@ -21,11 +21,11 @@ from dateutil import parser
 #filename_data='testdatas.xls'
 files=['H002670.xls','H002672.xls','H002674.xls','H002677.xls','LH001005.xls',
        'LH001006.xls','LH001007.xls','LH001008.xls','LH001009.xls','LH001010.xls']
-files=['LH001004.xls']
+files=['LH001006.xls']
 
 for fn in files:
     filename_data=fn
-    # filename_data='H002672.xls'
+    #filename_data='H002672.xls'
     # filename_data='H002674.xls'
     # filename_data='H002677.xls'
     # filename_data='LH00104.xls'
@@ -37,7 +37,7 @@ for fn in files:
     # filename_data='LH00110.xls'
 
     #number of points to average over
-    average_points=5
+    average_points=30
     #time interval in seconds (Will be automatically calculated if left at default 0, but can be manually filled in as well.)
     time_interval=0
 

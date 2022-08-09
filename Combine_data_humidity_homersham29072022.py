@@ -19,9 +19,9 @@ from dateutil import parser
 # DUT data in sheet 1 and logger data in sheet 2.
 # Both should hav a column called datetime and should have the date and time in the following layout: example 26/11/2021 15:15
 #filename_data='testdatas.xls'
-filename_data='LH001298_TS2500.xls'
+filename_data='data Homersham 220729.xlsx.xlsx'
 #number of points to average over
-average_points=10
+average_points=5
 #time interval in seconds (Will be automatically calculated if left at default 0, but can be manually filled in as well.)
 time_interval=0
 
@@ -61,7 +61,7 @@ data_DUT['datetime before shift']=data_DUT['datetime']
 # To average over points prior to our datapoint we need to shift the time with half the interval.
 #if data is out of sync it can be ajusted by the next shift
 data_DUT['datetime'] = data_DUT['datetime before shift']
-additional_shift=timedelta( minutes=0)
+additional_shift=timedelta(hours=12)
 time_shift=((average_points)*time_interval)+additional_shift
 data_DUT['datetime']=data_DUT['datetime']+time_shift
 average_time=time_interval*average_points
@@ -94,14 +94,14 @@ data_logger.to_excel(f"datacombined {filename_data}.xlsx")
 # print(data_logger.columns)
 # print(data_DUT.columns)
 
-ax=data_logger.plot.scatter(x='datetime', y='mTc 2900', color="DarkBlue", label="logger");
+ax=data_logger.plot.scatter(x='datetime', y='mTc 2500', color="DarkBlue", label="logger");
 #data_logger.plot.scatter(x="datetime", y="mean T", color="DarkGreen",marker="x" ,label="DUT",ax=ax);
-plt.errorbar(x=data_logger["datetime"], y=data_logger["mean Temperature"],xerr=average_time ,yerr=data_logger["std Temperature"], color="DarkGreen", label="DUT",fmt=".");
+plt.errorbar(x=data_logger["datetime"], y=data_logger['mean Temperature'],xerr=average_time ,yerr=data_logger["std Temperature"], color="DarkGreen", label="DUT",fmt=".");
 data_DUT.plot.line(x='datetime', y='Temperature', color="DarkBlue", label="DUT" ,ax=ax);
 
 az=data_logger.plot.scatter(x='datetime', y='mRH_at_DUT', color="DarkRed", label="logger");
-plt.errorbar(x=data_logger["datetime"], y=data_logger['mean Humidity'],xerr=average_time ,yerr=data_logger["std Humidity"], color="DarkGreen", label="DUT",fmt=".");
-data_DUT.plot.line(x='datetime', y='Humidity', color="DarkBlue", label="DUT",ax=az);
+plt.errorbar(x=data_logger["datetime"], y=data_logger['mean Relative humidity (dew/frost)'],xerr=average_time ,yerr=data_logger['std Relative humidity (dew/frost)'], color="DarkGreen", label="DUT",fmt=".");
+data_DUT.plot.line(x='datetime', y='Relative humidity (dew/frost)', color="DarkBlue", label="DUT",ax=az);
 plt.show()
 
 
