@@ -99,7 +99,7 @@ ax=data_logger.plot.scatter(x='datetime', y='mTc 2500', color="DarkBlue", label=
 plt.errorbar(x=data_logger["datetime"], y=data_logger["mean T, °C"],xerr=average_time ,yerr=data_logger["std T, °C"], color="DarkGreen", label="DUT",fmt=".");
 data_DUT.plot.line(x='datetime', y='T, °C', color="DarkBlue", label="DUT" ,ax=ax);
 
-az=data_logger.plot.scatter(x='datetime', y='mRH_at_DUT', color="DarkRed", label="logger");
+az=data_logger.plot.scatter(x='datetime', y='mRH_at_DUT_frost', color="DarkRed", label="logger");
 plt.errorbar(x=data_logger["datetime"], y=data_logger["mean RH, %"],xerr=average_time ,yerr=data_logger["std RH, %"], color="DarkGreen", label="DUT",fmt=".");
 data_DUT.plot.line(x='datetime', y='RH, %', color="DarkBlue", label="DUT",ax=az);
 plt.show()

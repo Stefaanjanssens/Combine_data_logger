@@ -19,7 +19,7 @@ from dateutil import parser
 # DUT data in sheet 1 and logger data in sheet 2.
 # Both should hav a column called datetime and should have the date and time in the following layout: example 26/11/2021 15:15
 #filename_data='testdatas.xls'
-filename_data='220824 Biotec7.xls'
+filename_data='LH001298_TS2500.xls'
 #number of points to average over
 average_points=10
 #time interval in seconds (Will be automatically calculated if left at default 0, but can be manually filled in as well.)
@@ -53,7 +53,7 @@ data_logger['datetime']=pd.to_datetime(data_logger['datetime'])
 #     prevdate=date
 
 if time_interval==0:
-    time_interval=data_DUT['datetime'].iloc[1]-data_DUT['datetime'].iloc[0]
+    time_interval=data_DUT['datetime'].iloc[3]-data_DUT['datetime'].iloc[2]
 data_DUT['datetime before shift']=data_DUT['datetime']
 
 
@@ -72,8 +72,8 @@ data_merge_right=pd.merge_asof(data_DUT,data_logger,tolerance=pd.Timedelta(avera
 data_merge_right_nonan=data_merge_right.dropna()
 
 #just for troubleshooting
-data_merge_right_nonan.to_excel("outputnan.xlsx")
-data_merge_right.to_excel("outputr.xlsx")
+#data_merge_right_nonan.to_excel("outputnan.xlsx")
+#data_merge_right.to_excel("outputr.xlsx")
 #data_merge_left.to_excel("outputl.xlsx")
 
 #averaging over  points
@@ -96,12 +96,12 @@ data_logger.to_excel(f"datacombined {filename_data}.xlsx")
 
 ax=data_logger.plot.scatter(x='datetime', y='mTc 2500', color="DarkBlue", label="logger");
 #data_logger.plot.scatter(x="datetime", y="mean T", color="DarkGreen",marker="x" ,label="DUT",ax=ax);
-plt.errorbar(x=data_logger["datetime"], y=data_logger["mean T, °C"],xerr=average_time ,yerr=data_logger["std T, °C"], color="DarkGreen", label="DUT",fmt=".");
-data_DUT.plot.line(x='datetime', y='T, °C', color="DarkBlue", label="DUT" ,ax=ax);
+plt.errorbar(x=data_logger["datetime"], y=data_logger["mean Temperature"],xerr=average_time ,yerr=data_logger["std Temperature"], color="DarkGreen", label="DUT",fmt=".");
+data_DUT.plot.line(x='datetime', y='Temperature', color="DarkBlue", label="DUT" ,ax=ax);
 
 az=data_logger.plot.scatter(x='datetime', y='mRH_at_DUT', color="DarkRed", label="logger");
-plt.errorbar(x=data_logger["datetime"], y=data_logger["mean RH, %"],xerr=average_time ,yerr=data_logger["std RH, %"], color="DarkGreen", label="DUT",fmt=".");
-data_DUT.plot.line(x='datetime', y='RH, %', color="DarkBlue", label="DUT",ax=az);
+plt.errorbar(x=data_logger["datetime"], y=data_logger['mean Humidity'],xerr=average_time ,yerr=data_logger["std Humidity"], color="DarkGreen", label="DUT",fmt=".");
+data_DUT.plot.line(x='datetime', y='Humidity', color="DarkBlue", label="DUT",ax=az);
 plt.show()
 
 

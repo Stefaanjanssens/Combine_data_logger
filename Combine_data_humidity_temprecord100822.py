@@ -19,7 +19,7 @@ from dateutil import parser
 # DUT data in sheet 1 and logger data in sheet 2.
 # Both should hav a column called datetime and should have the date and time in the following layout: example 26/11/2021 15:15
 #filename_data='testdatas.xls'
-filename_data='LH001298_TS2500.xls'
+filename_data='LH001007_TS2500.xls'
 #number of points to average over
 average_points=10
 #time interval in seconds (Will be automatically calculated if left at default 0, but can be manually filled in as well.)
