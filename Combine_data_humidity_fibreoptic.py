@@ -19,9 +19,9 @@ from dateutil import parser
 # DUT data in sheet 1 and logger data in sheet 2.
 # Both should hav a column called datetime and should have the date and time in the following layout: example 26/11/2021 15:15
 #filename_data='testdatas.xls'
-filename_data='FBGmicron.xlsx'
+filename_data='FBGpof_later.xlsx'
 #number of points to average over
-average_points=10
+average_points=4
 #time interval in seconds (Will be automatically calculated if left at default 0, but can be manually filled in as well.)
 time_interval=0
 
@@ -94,10 +94,10 @@ data_logger.to_excel(f"datacombined {filename_data}.xlsx")
 # print(data_logger.columns)
 # print(data_DUT.columns)
 
-ax=data_logger.plot.scatter(x='datetime', y='mean A1', color="DarkBlue", label="logger");
+ax=data_logger.plot.scatter(x='datetime', y='mean pof1', color="DarkBlue", label="logger");
 #data_logger.plot.scatter(x="datetime", y="mean T", color="DarkGreen",marker="x" ,label="DUT",ax=ax);
-plt.errorbar(x=data_logger["datetime"], y=data_logger["mean A1"],xerr=average_time ,yerr=data_logger["std A1"], color="DarkGreen", label="DUT",fmt=".");
-data_DUT.plot.line(x='datetime', y='A1', color="DarkBlue", label="DUT" ,ax=ax);
+plt.errorbar(x=data_logger["datetime"], y=data_logger["mean pof1"],xerr=average_time ,yerr=data_logger["std pof1"], color="DarkGreen", label="DUT",fmt=".");
+data_DUT.plot.line(x='datetime', y='pof1', color="DarkBlue", label="DUT" ,ax=ax);
 
 az=data_logger.plot.scatter(x='datetime', y='mRH_at_DUT_frost', color="DarkRed", label="logger");
 plt.errorbar(x=data_logger["datetime"], y=data_logger["mean RH, %"],xerr=average_time ,yerr=data_logger["std RH, %"], color="DarkGreen", label="DUT",fmt=".");
